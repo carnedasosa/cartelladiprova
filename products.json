@@ -1,0 +1,61 @@
+[
+  {
+    "id": 1,
+    "name": "Plasma Satic 2k26",
+    "category": "Hash Products",
+    "farm": "FlyFarm",
+    "thumb": "img/plasma-flyfarm.jpg",
+    "videoUrl": "media/plasma-flyfarm.mp4",
+    "tariffs": [
+      { "label": "3g", "price": "50€" },
+      { "label": "5g", "price": "70€" },
+      { "label": "10g", "price": "130€" },
+      { "label": "50g", "price": "580€" },
+      { "label": "100g", "price": "950€" }
+    ]
+  },
+    {
+    "id": 2,
+    "name": "Static 2k26",
+    "category": "Hash Products",
+    "farm": "FlyFarm",
+    "thumb": "img/static-flyfarm.jpg",
+    "videoUrl": "media/static-flyfarm.mp4",
+    "tariffs": [
+      { "label": "3g", "price": "40€" },
+      { "label": "5g", "price": "70€" },
+      { "label": "10g", "price": "130€" },
+      { "label": "50g", "price": "550€" },
+      { "label": "100g", "price": "900€" }
+    ]
+  },
+      {
+    "id": 3,
+    "name": "Eggs Frozen",
+    "category": "Hash Products",
+    "farm": "FlyFarm",
+    "thumb": "img/flyfarm-egg.jpg",
+    "videoUrl": "media/flyfarm-egg.mp4",
+    "tariffs": [
+      { "label": "1egg", "price": "120€" },
+      { "label": "2egg", "price": "220€" },
+      { "label": "5egg", "price": "500€" },
+      { "label": "10egg", "price": "850€" }
+    ]
+  },
+        {
+    "id": 4,
+    "name": "EGGS GREEN FARM",
+    "category": "Hash Products",
+    "farm": "Green Farm",
+    "thumb": "img/greenfarm-egg.jpg",
+    "videoUrl": "media/greenfarm-egg.mp4",
+    "tariffs": [
+      { "label": "1egg", "price": "110€" },
+      { "label": "2egg", "price": "210€" },
+      { "label": "5egg", "price": "500€" },
+      { "label": "10egg", "price": "850€" }
+    ]
+  }
+  
+]

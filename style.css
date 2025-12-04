@@ -1,0 +1,477 @@
+/* RESET & BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Rimuove highlight blu su tap */
+}
+
+body {
+    background-image: url(img/sfondo.png);
+    color: #ffffff;
+    overflow: hidden; /* Previene scroll del body, gestiamo lo scroll nelle screen */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* MARQUEE (Top Bar) */
+.top-bar {
+    background-color: #00e676; /* Accento Verde Neon */
+    color: #000;
+    padding: 8px 0;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 10;
+}
+
+.marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+/* MAIN APP CONTAINER */
+#app {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* SCREENS (SPA LOGIC) */
+.screen {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Scroll verticale interno */
+    padding: 20px 15px 90px 15px; /* Padding bottom ampio per non coprire col footer */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* HOME SCREEN STYLES */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.main-logo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00e676;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px black;
+    color: #00e676;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.category-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.category-card {
+    /*background: #1e1e1e;*/
+    padding: 75px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: transform 0.1s active;
+
+    overflow: hidden; /* Importante per mantenere i bordi arrotondati con le immagini */
+    /* Proprietà per le immagini di sfondo */
+    background-size: cover;
+    background-position: center;
+    /* Aggiungiamo un'ombra al testo per farlo risaltare ancora di più */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Card 1: CBD Flowers */
+.brown-card {
+    background-image: 
+        url('img/hash.png'); /* SOSTITUISCI con es: url('assets/img-flowers.jpg') */
+}
+
+.green-card {
+    background-image: 
+        url('img/weed.png'); /* SOSTITUISCI con es: url('assets/img-flowers.jpg') */
+}
+
+.white-card {
+    background-image: 
+        url('img/white.png'); /* SOSTITUISCI con es: url('assets/img-flowers.jpg') */
+}
+
+
+.category-card:active {
+    transform: scale(0.98);
+    background: #2a2a2a;
+}
+
+.category-card h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* CATEGORY / PRODUCT SCREEN */
+.header-compact {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: #1a1a1a8f;
+    border: 1px solid #00e676;
+    box-shadow: 0px 0px 6px #00e676;
+    color: #ccc;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#search-bar, #farm-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    background: #1e1e1e;
+    color: white;
+    font-size: 16px; /* Evita zoom su iOS */
+    outline: none;
+}
+
+#farm-select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300e676%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 12px auto;
+    appearance: none;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+    border: 1px solid #2a2a2a;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+.product-meta {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.product-price {
+    color: #00e676;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* LINKS SCREEN */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.link-btn {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+/* TELEGRAM: blu acceso sui bordi che sfuma verso il centro */
+.link-telegram {
+    background: radial-gradient(circle,
+        #003761 0%,      /* centro più scuro */
+        #006fb3 55%,
+        #00b0ff 100%     /* bordi più chiari */
+    );
+    border-color: #00d0ff;
+    box-shadow: 0 0 14px rgba(0, 208, 255, 0.8);
+}
+
+/* INSTAGRAM: arancione/giallo instagram, bordi luminosi */
+.link-instagram {
+    background: radial-gradient(circle,
+        #7a3a00 0%,      /* centro più scuro */
+        #f58b2a 55%,
+        #ffd34a 100%     /* bordi giallo/arancio molto accesi */
+    );
+    border-color: #ffd34a;
+    box-shadow: 0 0 14px rgba(255, 211, 74, 0.8);
+}
+
+/* Piccolo effetto pressione */
+.link-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+
+/* FOOTER NAV */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 71px;
+    background-color: #1a1a1a8f;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #333;
+    z-index: 100;
+    padding-bottom: 2px;
+}
+
+.bottom-icon {
+    margin-top: 8px;
+}
+
+.nav-item {
+    background: none;
+    box-shadow: 0px 0px 10px #00e676;
+    border: none;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    cursor: pointer;
+    width: 21.33%;
+    height: 88%;
+    border-radius: 23px;
+    background-color: #00e6761a;
+    border: 2px solid #00e676;
+}
+
+.nav-item .icon {
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+
+.nav-item.active {
+    color: #00e676;
+}
+
+
+
+
+
+/* INFO SCREEN / ACCORDION */
+.info-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Contenitore di ogni card */
+.info-card {
+    background: rgba(20, 20, 20, 0.95);
+    border-radius: 18px;
+    padding: 0;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+/* Header cliccabile */
+.info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+}
+
+.info-icon {
+    font-size: 18px;
+}
+
+.info-title {
+    flex: 1;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.info-arrow {
+    font-size: 30px;
+    opacity: 0.8;
+}
+
+/* Corpo che si apre/chiude */
+.info-body {
+    padding: 10px 16px 14px 16px;
+    font-size: 14px;
+    color: #ddd;
+    line-height: 1.4;
+    border-top: 1px solid #333;
+    
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease, opacity 0.25s ease;
+}
+
+/* Stato aperto */
+.info-card.open .info-body {
+    max-height: 500px; /* abbastanza grande per il contenuto */
+    opacity: 1;
+}
+
+/* Freccia ruotata quando aperto */
+.info-card.open .info-arrow {
+    transform: rotate(180deg);
+}
+
+.no-products-message {
+    grid-column: 1 / -1;   /* 👉 occupa entrambe le colonne della griglia */
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #f11c1c;
+    padding: 10px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    
+}
+
+
+
+
+
+
+
+/* PRODOTTI: Griglia 2 colonne */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* Thumbnail piccola */
+.prod-thumb-small {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+
+/* PAGINA PRODOTTO */
+.product-detail {
+    margin-top: 20px;
+}
+
+.product-thumb-big img,
+.product-video-wrapper video {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.product-thumb-big {
+    margin-bottom: 15px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* TARIFFE 2×2 */
+.tariffs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.tariff-card {
+    background: #1e1e1e;
+    border-radius: 12px;
+    border: 1px solid #333;
+    padding: 12px;
+    text-align: center;
+}
+
+.tariff-quantity {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.tariff-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #00e676;
+}

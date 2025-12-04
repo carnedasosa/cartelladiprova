@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apulian Mini App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="marquee">
+            <span>🌿 BENVENUTI IN APULIAN APP • SPEDIZIONI RAPIDE • QUALITÀ PREMIUM • NUOVI ARRIVI OGNI SETTIMANA 🌿</span>
+        </div>
+    </div>
+
+    <main id="app">
+        
+        <!-- HOME -->
+        <div id="home-screen" class="screen">
+            <div class="logo-container">
+                <img src="img/apulian.jpg" alt="Apulian Logo" class="main-logo">
+            </div>
+
+            <h2 class="section-title">CATEGORIE</h2>
+            
+            <div class="category-grid">
+                <div class="category-card brown-card" onclick="openCategory('Hash Products')"></div>
+                <div class="category-card green-card" onclick="openCategory('Weed Flowers')"></div>
+                <div class="category-card white-card" onclick="openCategory('Extracts')"></div>
+            </div>
+        </div>
+
+        <!-- CATEGORY -->
+        <div id="category-screen" class="screen hidden">
+            <div class="header-compact">
+                <button class="back-btn" onclick="showScreen('home-screen')">❮ Indietro</button>
+                <h2 id="category-title">Nome Categoria</h2>
+            </div>
+
+            <div class="filters">
+                <input type="text" id="search-bar" placeholder="🔍 Cerca prodotto..." onkeyup="filterProducts()">
+                <select id="farm-select" onchange="filterProducts()">
+                    <option value="all">Tutte le Farm</option>
+                </select>
+            </div>
+
+            <div id="product-list" class="product-list"></div>
+        </div>
+
+
+        <!-- PRODUCT PAGE (NUOVA) -->
+        <div id="product-screen" class="screen hidden">
+            <div class="header-compact">
+                <button class="back-btn" onclick="showScreen('category-screen')">❮ Indietro</button>
+                <div>
+                    <h2 id="product-title"></h2>
+                    <p id="product-farm-top" style="font-size:13px; opacity:0.8;"></p>
+                </div>
+            </div>
+
+            <div class="product-detail">
+
+                <div id="product-video-wrapper" class="product-video-wrapper hidden">
+                    <video id="product-video" controls playsinline>
+                        <source id="product-video-src" src="">
+                    </video>
+                </div>
+
+                <h3 class="tariffs-title">Disponibile in:</h3>
+                <div id="tariffs-grid" class="tariffs-grid"></div>
+
+            </div>
+        </div>
+
+
+
+        <!-- INFO -->
+        <div id="info-screen" class="screen hidden">
+            <div class="logo-container">
+                <img src="img/apulian.jpg" alt="Apulian Logo" class="main-logo">
+            </div>
+
+            <div class="info-wrapper">
+                <h2 class="section-title">INFO</h2>
+
+                <div class="info-card" id="info-delivery">
+                    <div class="info-header" onclick="toggleInfoCard('delivery')">
+                        <span class="info-icon">🛵</span>
+                        <span class="info-title">DELIVERY</span>
+                        <span class="info-arrow">▾</span>
+                    </div>
+                    <div class="info-body">
+                        <p>Mandare un messaggio:<br>- prodotto/quantità<br>- orario preferito<br>- screen Instagram<br>- carta identità</p>
+                    </div>
+                </div>
+
+                <div class="info-card" id="info-horaires">
+                    <div class="info-header" onclick="toggleInfoCard('horaires')">
+                        <span class="info-icon">⏱️</span>
+                        <span class="info-title">ORARI</span>
+                        <span class="info-arrow">▾</span>
+                    </div>
+                    <div class="info-body">
+                        <p>Lun-Dom : 16:00 - 22:00<br>Supporto privato Telegram.</p>
+                    </div>
+                </div>
+
+                <div class="info-card" id="info-shipping">
+                    <div class="info-header" onclick="toggleInfoCard('shipping')">
+                        <span class="info-icon">📦</span>
+                        <span class="info-title">SPEDIZIONI</span>
+                        <span class="info-arrow">▾</span>
+                    </div>
+                    <div class="info-body">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- LINKS -->
+        <div id="links-screen" class="screen hidden">
+            <h2 class="section-title">LINK UTILI</h2>
+            <div class="links-container">
+                <a href="https://t.me/apuliandealer2026" class="link-btn link-telegram">
+                    💬 Supporto Telegram
+                </a>
+                <a href="https://www.instagram.com/apuliandealer2025" class="link-btn link-instagram">
+                    📷 Instagram
+                </a>
+                <a href="https://signal.me/#eu/0tTWbTYK4YlvWUNa81UZOPOCLMmuGZNIfpRnyfbxeReprIswqGFD5aokxjL3rJ1k" class="link-btn link-telegram">
+                    💬 Signal
+                </a>
+            </div>
+        </div>
+
+
+    </main>
+
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="showScreen('home-screen')" id="nav-home">
+            <img src="img/icona-casa.png" class="bottom-icon" style="width:21px;">
+            <span class="label">HOME</span>
+        </button>
+        <button class="nav-item" onclick="showScreen('info-screen')" id="nav-info">
+            <img src="img/icona-info.png" class="bottom-icon" style="width:21px;">
+            <span class="label">INFO</span>
+        </button>
+        <button class="nav-item" onclick="showScreen('links-screen')" id="nav-links">
+            <img src="img/icona-link.png" class="bottom-icon" style="width:21px;">
+            <span class="label">LINKS</span>
+        </button>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
