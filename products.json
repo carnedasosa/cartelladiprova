@@ -5,7 +5,7 @@
     "category": "Hash Products",
     "farm": "FlyFarm",
     "thumb": "img/plasma-flyfarm.jpg",
-    "videoUrl": "media/plasma-flyfarm.mp4",
+    "videoUrl": "media/-flyfarm.mp4",
     "tariffs": [
       { "label": "3g", "price": "50€" },
       { "label": "5g", "price": "70€" },
